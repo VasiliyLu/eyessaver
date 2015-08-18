@@ -15,9 +15,11 @@ type
   TfmSettings = class(TForm)
     Button1: TButton;
     Button2: TButton;
-    LabeledEdit1: TLabeledEdit;
-    LabeledEdit2: TLabeledEdit;
+    edMinInt: TLabeledEdit;
+    edSecInt: TLabeledEdit;
     procedure Button1Click(Sender: TObject);
+    procedure edMinIntKeyPress(Sender: TObject; var Key: char);
+    procedure FormShow(Sender: TObject);
   private
     { private declarations }
   public
@@ -37,8 +39,20 @@ uses fblink;
 
 procedure TfmSettings.Button1Click(Sender: TObject);
 begin
-  fblink.fmBlink.Interval:= ;
+  fmBlink.Interval := StrToInt(edMinInt.Text);
+  fmBlink.HintTime := StrToInt(edSecInt.Text);
+  fmBlink.SaveSettings;
+end;
+
+procedure TfmSettings.edMinIntKeyPress(Sender: TObject; var Key: char);
+begin
+  if not (Key in ['0'..'9',#13,#8]) then Key := #0;
+end;
+
+procedure TfmSettings.FormShow(Sender: TObject);
+begin
+  edMinInt.Text := IntToStr(fmBlink.Interval);
+  edSecInt.Text := IntToStr(fmBlink.HintTime);
 end;
 
 end.
-

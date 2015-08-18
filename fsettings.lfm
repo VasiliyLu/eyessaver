@@ -6,16 +6,17 @@ object fmSettings: TfmSettings
   Caption = 'Настройки'
   ClientHeight = 140
   ClientWidth = 277
+  OnShow = FormShow
   LCLVersion = '1.4.2.0'
-  object LabeledEdit1: TLabeledEdit
+  object edMinInt: TLabeledEdit
     Left = 32
     Height = 21
     Top = 24
     Width = 208
-    EditLabel.AnchorSideLeft.Control = LabeledEdit1
-    EditLabel.AnchorSideRight.Control = LabeledEdit1
+    EditLabel.AnchorSideLeft.Control = edMinInt
+    EditLabel.AnchorSideRight.Control = edMinInt
     EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = LabeledEdit1
+    EditLabel.AnchorSideBottom.Control = edMinInt
     EditLabel.Left = 32
     EditLabel.Height = 13
     EditLabel.Top = 8
@@ -24,16 +25,17 @@ object fmSettings: TfmSettings
     EditLabel.ParentColor = False
     TabOrder = 0
     Text = '30'
+    OnKeyPress = edMinIntKeyPress
   end
-  object LabeledEdit2: TLabeledEdit
+  object edSecInt: TLabeledEdit
     Left = 32
     Height = 21
     Top = 64
     Width = 208
-    EditLabel.AnchorSideLeft.Control = LabeledEdit2
-    EditLabel.AnchorSideRight.Control = LabeledEdit2
+    EditLabel.AnchorSideLeft.Control = edSecInt
+    EditLabel.AnchorSideRight.Control = edSecInt
     EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = LabeledEdit2
+    EditLabel.AnchorSideBottom.Control = edSecInt
     EditLabel.Left = 32
     EditLabel.Height = 13
     EditLabel.Top = 48
@@ -42,6 +44,7 @@ object fmSettings: TfmSettings
     EditLabel.ParentColor = False
     TabOrder = 1
     Text = '5'
+    OnKeyPress = edMinIntKeyPress
   end
   object Button1: TButton
     Left = 56
