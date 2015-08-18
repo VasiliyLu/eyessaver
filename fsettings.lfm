@@ -1,0 +1,65 @@
+object fmSettings: TfmSettings
+  Left = 254
+  Height = 140
+  Top = 132
+  Width = 277
+  Caption = 'Настройки'
+  ClientHeight = 140
+  ClientWidth = 277
+  LCLVersion = '1.4.2.0'
+  object LabeledEdit1: TLabeledEdit
+    Left = 32
+    Height = 21
+    Top = 24
+    Width = 208
+    EditLabel.AnchorSideLeft.Control = LabeledEdit1
+    EditLabel.AnchorSideRight.Control = LabeledEdit1
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = LabeledEdit1
+    EditLabel.Left = 32
+    EditLabel.Height = 13
+    EditLabel.Top = 8
+    EditLabel.Width = 208
+    EditLabel.Caption = 'Интервал между напоминаниями, мин'
+    EditLabel.ParentColor = False
+    TabOrder = 0
+    Text = '30'
+  end
+  object LabeledEdit2: TLabeledEdit
+    Left = 32
+    Height = 21
+    Top = 64
+    Width = 208
+    EditLabel.AnchorSideLeft.Control = LabeledEdit2
+    EditLabel.AnchorSideRight.Control = LabeledEdit2
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = LabeledEdit2
+    EditLabel.Left = 32
+    EditLabel.Height = 13
+    EditLabel.Top = 48
+    EditLabel.Width = 208
+    EditLabel.Caption = 'Время отображения напоминания, сек'
+    EditLabel.ParentColor = False
+    TabOrder = 1
+    Text = '5'
+  end
+  object Button1: TButton
+    Left = 56
+    Height = 25
+    Top = 104
+    Width = 75
+    Caption = 'OK'
+    ModalResult = 1
+    OnClick = Button1Click
+    TabOrder = 2
+  end
+  object Button2: TButton
+    Left = 168
+    Height = 25
+    Top = 104
+    Width = 75
+    Caption = 'Отмена'
+    ModalResult = 2
+    TabOrder = 3
+  end
+end
