@@ -1,26 +1,26 @@
 object fmSettings: TfmSettings
   Left = 254
-  Height = 140
+  Height = 217
   Top = 132
-  Width = 277
+  Width = 248
   Caption = 'Настройки'
-  ClientHeight = 140
-  ClientWidth = 277
+  ClientHeight = 217
+  ClientWidth = 248
   OnShow = FormShow
-  LCLVersion = '1.4.2.0'
+  LCLVersion = '1.6.4.0'
   object edMinInt: TLabeledEdit
-    Left = 32
-    Height = 21
+    Left = 16
+    Height = 23
     Top = 24
-    Width = 208
+    Width = 224
     EditLabel.AnchorSideLeft.Control = edMinInt
     EditLabel.AnchorSideRight.Control = edMinInt
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = edMinInt
-    EditLabel.Left = 32
-    EditLabel.Height = 13
-    EditLabel.Top = 8
-    EditLabel.Width = 208
+    EditLabel.Left = 16
+    EditLabel.Height = 15
+    EditLabel.Top = 6
+    EditLabel.Width = 224
     EditLabel.Caption = 'Интервал между напоминаниями, мин'
     EditLabel.ParentColor = False
     TabOrder = 0
@@ -28,18 +28,18 @@ object fmSettings: TfmSettings
     OnKeyPress = edMinIntKeyPress
   end
   object edSecInt: TLabeledEdit
-    Left = 32
-    Height = 21
+    Left = 16
+    Height = 23
     Top = 64
-    Width = 208
+    Width = 224
     EditLabel.AnchorSideLeft.Control = edSecInt
     EditLabel.AnchorSideRight.Control = edSecInt
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = edSecInt
-    EditLabel.Left = 32
-    EditLabel.Height = 13
-    EditLabel.Top = 48
-    EditLabel.Width = 208
+    EditLabel.Left = 16
+    EditLabel.Height = 15
+    EditLabel.Top = 46
+    EditLabel.Width = 224
     EditLabel.Caption = 'Время отображения напоминания, сек'
     EditLabel.ParentColor = False
     TabOrder = 1
@@ -47,9 +47,9 @@ object fmSettings: TfmSettings
     OnKeyPress = edMinIntKeyPress
   end
   object Button1: TButton
-    Left = 56
+    Left = 40
     Height = 25
-    Top = 104
+    Top = 184
     Width = 75
     Caption = 'OK'
     ModalResult = 1
@@ -57,12 +57,27 @@ object fmSettings: TfmSettings
     TabOrder = 2
   end
   object Button2: TButton
-    Left = 168
+    Left = 136
     Height = 25
-    Top = 104
+    Top = 184
     Width = 75
     Caption = 'Отмена'
     ModalResult = 2
     TabOrder = 3
+  end
+  object Memo1: TMemo
+    Left = 16
+    Height = 60
+    Top = 108
+    Width = 224
+    TabOrder = 4
+  end
+  object Label1: TLabel
+    Left = 16
+    Height = 15
+    Top = 93
+    Width = 97
+    Caption = 'Текст сообщения'
+    ParentColor = False
   end
 end

@@ -17,6 +17,8 @@ type
     Button2: TButton;
     edMinInt: TLabeledEdit;
     edSecInt: TLabeledEdit;
+    Label1: TLabel;
+    Memo1: TMemo;
     procedure Button1Click(Sender: TObject);
     procedure edMinIntKeyPress(Sender: TObject; var Key: char);
     procedure FormShow(Sender: TObject);

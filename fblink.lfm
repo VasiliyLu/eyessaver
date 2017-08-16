@@ -1,7 +1,7 @@
 object fmBlink: TfmBlink
-  Left = 253
+  Left = 286
   Height = 347
-  Top = 133
+  Top = 119
   Width = 660
   AlphaBlend = True
   AlphaBlendValue = 200
@@ -11,10 +11,9 @@ object fmBlink: TfmBlink
   ClientWidth = 660
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
-  OnHide = FormHide
   ShowHint = True
   ShowInTaskBar = stNever
-  LCLVersion = '1.4.2.0'
+  LCLVersion = '1.6.4.0'
   WindowState = wsMaximized
   object Panel1: TPanel
     Left = 0
@@ -27,10 +26,10 @@ object fmBlink: TfmBlink
     TabOrder = 0
     object Label1: TLabel
       Left = 1
-      Height = 345
+      Height = 169
       Top = 1
       Width = 658
-      Align = alClient
+      Align = alTop
       Alignment = taCenter
       AutoSize = False
       Caption = 'Посмотри по сторонам'
@@ -42,7 +41,16 @@ object fmBlink: TfmBlink
       Font.Quality = fqDraft
       ParentColor = False
       ParentFont = False
+      WordWrap = True
       OnClick = Label1Click
+    end
+    object ProgressBar1: TProgressBar
+      Left = 1
+      Height = 46
+      Top = 170
+      Width = 658
+      Align = alTop
+      TabOrder = 0
     end
   end
   object TrayIcon1: TTrayIcon
@@ -98,8 +106,8 @@ object fmBlink: TfmBlink
     left = 347
     top = 185
   end
-  object Timer2: TTimer
-    OnTimer = Timer2Timer
+  object tmrHintTime: TTimer
+    OnTimer = tmrHintTimeTimer
     left = 560
     top = 221
   end
@@ -111,7 +119,7 @@ object fmBlink: TfmBlink
       OnClick = MenuItem3Click
     end
     object MenuItem1: TMenuItem
-      Caption = 'Настройкм'
+      Caption = 'Настройки'
       OnClick = MenuItem1Click
     end
     object MenuItem2: TMenuItem

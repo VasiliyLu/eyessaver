@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, Menus, Registry;
+  StdCtrls, Menus, ComCtrls, Registry;
 
 type
 
@@ -19,31 +19,35 @@ type
     MenuItem3: TMenuItem;
     Panel1: TPanel;
     PopupMenu1: TPopupMenu;
+    ProgressBar1: TProgressBar;
     Timer1: TTimer;
-    Timer2: TTimer;
+    tmrHintTime: TTimer;
     TrayIcon1: TTrayIcon;
     procedure FormCreate(Sender: TObject);
-    procedure FormHide(Sender: TObject);
     procedure Label1Click(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure Timer2Timer(Sender: TObject);
+    procedure tmrHintTimeTimer(Sender: TObject);
     procedure TrayIcon1Click(Sender: TObject);
   private
-    FHintTime: integer;
+    FHintTime: integer; //sec
+    FHintTimeAcc: integer;
     { private declarations }
     //FLast: integer;
     FInterval: integer; //min
+    FTextMessage: string;
     procedure LoadSettings;
 
     procedure SetHintTime(AValue: integer);
     procedure SetInterval(AValue: integer);
+    procedure SetTextMessage(AValue: string);
   public
     { public declarations }
     property Interval: integer read FInterval write SetInterval;
     property HintTime: integer read FHintTime write SetHintTime;
+    property TextMessage: string read FTextMessage write SetTextMessage;
     procedure SaveSettings;
     procedure ShowScreen;
   end;
@@ -89,22 +93,26 @@ begin
   Hide;
 end;
 
-procedure TfmBlink.FormHide(Sender: TObject);
-begin
-   Timer2.Enabled:= false;
-end;
-
 procedure TfmBlink.FormCreate(Sender: TObject);
 begin
-  Interval:=30;
-  HintTime:=10;
+  Interval := 30;
+  HintTime := 10;
+  TextMessage := 'Посмотри по сторонам :)';
   LoadSettings;
 end;
 
-procedure TfmBlink.Timer2Timer(Sender: TObject);
+procedure TfmBlink.tmrHintTimeTimer(Sender: TObject);
 begin
-  if  fsVisible in self.FormState then
-    Hide;
+
+  Inc(FHintTimeAcc);
+  if (FHintTimeAcc = FHintTime) then
+  begin
+    tmrHintTime.Enabled := False;
+    FHintTimeAcc := 0;
+    if fsVisible in self.FormState then
+      Hide;
+  end;
+  ProgressBar1.Position := trunc(FHintTimeAcc / FHintTime * 100);
 end;
 
 procedure TfmBlink.TrayIcon1Click(Sender: TObject);
@@ -116,18 +124,19 @@ procedure TfmBlink.LoadSettings;
 var
   r: TRegistry;
 begin
-  r:= TRegistry.Create;
+  r := TRegistry.Create;
   try
-    r.RootKey:=HKEY_CURRENT_USER;
+    r.RootKey := HKEY_CURRENT_USER;
     r.OpenKeyReadOnly('SOFTWARE\Vasliy\eyesaver');
-    try
-    Interval := r.ReadInteger('Interval');
-    HintTime := r.ReadInteger('HintTime');
-    except
+    if r.ValueExists('Interval') then
+      Interval := r.ReadInteger('Interval');
+    if r.ValueExists('HintTime') then
+      HintTime := r.ReadInteger('HintTime');
+    if r.ValueExists('TextMessage') then
+      TextMessage := r.ReadString('TextMessage');
 
-    end;
   finally
-    r.free;
+    r.Free;
   end;
 end;
 
@@ -135,37 +144,50 @@ procedure TfmBlink.SaveSettings;
 var
   r: TRegistry;
 begin
-  r:= TRegistry.Create;
+  r := TRegistry.Create;
   try
-    r.RootKey:=HKEY_CURRENT_USER;
-    r.OpenKey('SOFTWARE\Vasliy\eyesaver',true);
-    r.WriteInteger('Interval',Interval);
-    r.WriteInteger('HintTime',HintTime);
+    r.RootKey := HKEY_CURRENT_USER;
+    r.OpenKey('SOFTWARE\Vasliy\eyesaver', True);
+    r.WriteInteger('Interval', Interval);
+    r.WriteInteger('HintTime', HintTime);
+    r.WriteString('TextMessage', TextMessage);
   finally
-    r.free;
+    r.Free;
   end;
 end;
 
 procedure TfmBlink.SetInterval(AValue: integer);
 begin
-  if FInterval=AValue then Exit;
-  FInterval:=AValue;
-  self.Timer1.Interval:=AValue *1000*60;
+  if FInterval = AValue then
+    Exit;
+  FInterval := AValue;
+  self.Timer1.Interval := AValue * 1000 * 60;
+end;
+
+procedure TfmBlink.SetTextMessage(AValue: string);
+begin
+  if FTextMessage = AValue then
+    Exit;
+
+  FTextMessage := AValue;
+  Label1.Caption := AValue;
 end;
 
 procedure TfmBlink.ShowScreen;
 begin
+  ProgressBar1.Position := 0;
+  FHintTimeAcc := 0;
+  tmrHintTime.Enabled := True;
   //показать окно
   Show;
-  Timer2.Enabled:=true;
 end;
 
 procedure TfmBlink.SetHintTime(AValue: integer);
 begin
-  if FHintTime=AValue then Exit;
-  FHintTime:=AValue;
-  Timer2.Interval:=AValue *1000;
+  if FHintTime = AValue then
+    Exit;
+  FHintTime := AValue;
+  //tmrHintTime.Interval:=AValue *1000;
 end;
 
 end.
-
