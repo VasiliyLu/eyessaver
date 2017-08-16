@@ -43,6 +43,7 @@ procedure TfmSettings.Button1Click(Sender: TObject);
 begin
   fmBlink.Interval := StrToInt(edMinInt.Text);
   fmBlink.HintTime := StrToInt(edSecInt.Text);
+  fmBlink.TextMessage:=Memo1.Lines.Text;
   fmBlink.SaveSettings;
 end;
 
@@ -55,6 +56,7 @@ procedure TfmSettings.FormShow(Sender: TObject);
 begin
   edMinInt.Text := IntToStr(fmBlink.Interval);
   edSecInt.Text := IntToStr(fmBlink.HintTime);
+  Memo1.lines.Text:=fmBlink.TextMessage;
 end;
 
 end.
